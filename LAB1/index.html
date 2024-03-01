@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+    function orderSimple(a, b, c) {
+        if ( a < b && b < c ) console.log (a, b, c);
+        if ( a < b && c < b ) console.log (a, c, b);
+        if ( b < c && c < a ) console.log (b, c, a);
+    }
+
+    function orderInterChange(a, b, c) {
+        let aux = 0; 
+        if (a > b) { aux = a; a = b; b = aux;}
+        if (a > c) { aux = a; a = c; c = aux;}
+        if (b > c) { aux = b; b = c; c = aux;}
+
+        console.log (a,b,c)
+    }
+
+    function orderArray(a, b, c) {
+    let ar = [a, b, c];
+    let n = ar.length;
+    let aux = 0;
+
+    for (let i = 0; i < n - 1; i++) {
+        for (let j = 0; j < n - i - 1; j++) {
+            if (ar[j] > ar[j + 1]) {
+                aux = ar[j];
+                ar[j] = ar[j + 1];
+                ar[j + 1] = aux;
+            }
+        }
+    }
+    console.log(ar);
+}
+
+    console.log("Lab 1: Juan Agustin Apaza Guzman");
+    console.log("entrada 7,5,6");
+    console.log("Ordenamiento simple");
+    orderSimple(7,5,6);
+
+    console.log("ordenamiento intercambio");
+    orderInterChange(7,5,6);
+
+    console.log("ordenamiento arreglo");
+    orderArray(7,5,6);
+
+    </script>
+</body>
+</html>
