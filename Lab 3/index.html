@@ -7,45 +7,61 @@
 </head>
 <body>
 
-<h1>Datos de Usuarios</h1>
+    <h1>Datos de Usuarios</h1>
+    <p>Lab 003: Ingenieria de Software </p>
+    <p>  Operacion con numeros complejos</p>
+    <p> @autor Juan Agustin Apaza Guzmanv</p>
+    <p>@version 1.0</p>
+    <p>@date 07/03/2024</p>
+    <div id="usuarios-container"></div>
 
-<div id="usuarios-container"></div>
-
-<script>
-// Definición de la clase Usuario
-class Usuario {
-    constructor(nombre, edad) {
-        this.nombre = nombre;
-        this.edad = edad;
+    <script>
+    // Definición de la clase Usuario
+    class Usuario {
+        constructor(nombre, edad) {
+            this.nombre = nombre;
+            this.edad = edad;
+        }
     }
 
-    // Método para obtener los datos del usuario en formato HTML
-    obtenerDatosHTML() {
-        return `
-            <h2>Usuario</h2>
-            <p><strong>Nombre:</strong> ${this.nombre}</p>
-            <p><strong>Edad:</strong> ${this.edad}</p>
-            <hr>
-        `;
+    // Definición de la clase ControlUsuario
+    class ControlUsuario {
+        constructor() {
+            this.usuarios = [];
+        }
+
+        // Método para agregar un usuario a la lista
+        agregarUsuario(usuario) {
+            this.usuarios.push(usuario);
+        }
+
+        // Método para mostrar los datos de los usuarios en HTML
+        mostrarUsuariosHTML(containerId) {
+            const container = document.getElementById(containerId);
+            this.usuarios.forEach(usuario => {
+                const usuarioDiv = document.createElement('div');
+                usuarioDiv.innerHTML = `
+                    <h2>Usuario</h2>
+                    <p><strong>Nombre:</strong> ${usuario.nombre}</p>
+                    <p><strong>Edad:</strong> ${usuario.edad}</p>
+                    <hr>
+                `;
+                container.appendChild(usuarioDiv);
+            });
+        }
     }
-}
 
-// Datos de los usuarios
-const usuarios = [
-    new Usuario("Usuario1", 25),
-    new Usuario("Usuario2", 30),
-    new Usuario("Usuario3", 40)
-];
+    // Crear una instancia de ControlUsuario
+    const controlUsuario = new ControlUsuario();
 
-// Mostrar los datos de los usuarios en HTML
-const usuariosContainer = document.getElementById('usuarios-container');
+    // Crear los datos de 3 usuarios y agregarlos al controlUsuario
+    controlUsuario.agregarUsuario(new Usuario("Juan", 22));
+    controlUsuario.agregarUsuario(new Usuario("Soledad", 22));
+    controlUsuario.agregarUsuario(new Usuario("Valeria", 20));
 
-usuarios.forEach(usuario => {
-    const usuarioDiv = document.createElement('div');
-    usuarioDiv.innerHTML = usuario.obtenerDatosHTML();
-    usuariosContainer.appendChild(usuarioDiv);
-});
-</script>
+    // Mostrar los datos de los usuarios en HTML
+    controlUsuario.mostrarUsuariosHTML('usuarios-container');
+    </script>
 
 </body>
 </html>
