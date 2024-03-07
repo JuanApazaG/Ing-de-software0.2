@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mostrar Datos de Usuarios</title>
+</head>
+<body>
+
+<h1>Datos de Usuarios</h1>
+
+<div id="usuarios-container"></div>
+
+<script>
+// Definición de la clase Usuario
+class Usuario {
+    constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    // Método para obtener los datos del usuario en formato HTML
+    obtenerDatosHTML() {
+        return `
+            <h2>Usuario</h2>
+            <p><strong>Nombre:</strong> ${this.nombre}</p>
+            <p><strong>Edad:</strong> ${this.edad}</p>
+            <hr>
+        `;
+    }
+}
+
+// Datos de los usuarios
+const usuarios = [
+    new Usuario("Usuario1", 25),
+    new Usuario("Usuario2", 30),
+    new Usuario("Usuario3", 40)
+];
+
+// Mostrar los datos de los usuarios en HTML
+const usuariosContainer = document.getElementById('usuarios-container');
+
+usuarios.forEach(usuario => {
+    const usuarioDiv = document.createElement('div');
+    usuarioDiv.innerHTML = usuario.obtenerDatosHTML();
+    usuariosContainer.appendChild(usuarioDiv);
+});
+</script>
+
+</body>
+</html>
