@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">Login</h3>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // User Control Class
+        class UserControl {
+
+            constructor() {
+                this.apiUrl = 'https://script.google.com/macros/s/AKfycbzGIyiI4jmB7DskxrPPzLelhmwQVNucBxf9qyht3cDQox2Dp_7yr0alLZR1YDelg5zu/exec';
+                this.userList = [];
+                this.fetchUserList();
+            }
+
+            fetchUserList() {
+                fetch(this.apiUrl + '?ruta=usuarios')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.userList = data.map(user => {
+                            return {
+                                username: user.Nombre,
+                                password: user.Clave
+                            };
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching user list from API:', error);
+                    });
+            }
+
+            isAccessAllowed(username, password) {
+                return this.userList.some(user => user.username === username && user.password === password);
+            }
+        }
+
+        // Create an instance of UserControl
+        const userControl = new UserControl();
+
+        // Event handler for form submission
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the form from being submitted conventionally
+
+            // Get the values of username and password
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Check user access
+            if (userControl.isAccessAllowed(username, password)) {
+                alert("Access granted"); // Access granted message
+                // Here you could redirect the user to another page or perform other actions
+            } else {
+                alert("Access denied"); // Access denied message
+            }
+        });
+    </script>
+
+</body>
+
+</html>
