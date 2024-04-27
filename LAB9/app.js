@@ -1,24 +1,7 @@
-/*
-Lab 009: Ingenieria de Software
-Apirest Pacientes en NodeJs
-@autor Juan Agustin Apaza Guzman
-@version 0.1
-@date 26/04/2024
-*/
-const express = require("express");
+const express = require('express');
+const PacienteService = require('../PacienteService');
+
 const app = express();
-
-app.listen(5000, () => {
-    console.log("Servidor escuchando en http://localhost:5000");
-});
-
-app.get("/", (req, res) => {
-    res.send("Hola mundo \n Juan Agustin Apaza");
-});
-
-// Importar PacienteService usando la ruta relativa
-const PacienteService = require('./PacienteService');
-
 const pacienteService = new PacienteService();
 
 app.get('/pacientes', (req, res) => {
