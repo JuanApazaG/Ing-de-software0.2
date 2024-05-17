@@ -1,0 +1,10 @@
+package com.sis324.Usuarios.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.sis324.Usuarios.models.Patient;
+
+@Repository
+public interface PatientRespository extends JpaRepository<Patient, Long>{
+    
+}
